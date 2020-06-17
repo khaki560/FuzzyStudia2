@@ -1,0 +1,132 @@
+﻿<?xml version='1.0' encoding='utf-8'?>
+<root>
+  <settings>
+    <connectionString></connectionString>
+    <quantifiers>
+      <quantifier>
+        <name>Relative</name>
+        <type>Relative</type>
+        <discourse>
+          <min>0</min>
+          <max>1</max>
+        </discourse>
+        <label>
+          <name>Alomost None</name>
+          <membershipFunction>trapezoid(-1, 0, 0.1, 0.2)</membershipFunction>
+        </label>
+        <label>
+          <name>Some</name>
+          <membershipFunction>trapezoid(0.1, 0.2, 0.3, 0.4)</membershipFunction>
+        </label>
+        <label>
+          <name>about Half</name>
+          <membershipFunction>trapezoid(0.3, 0.4, 0.5, 0.6)</membershipFunction>
+        </label>
+        <label>
+          <name>Many</name>
+          <membershipFunction>trapezoid(0.5, 0.6, 0.7, 0.8)</membershipFunction>
+        </label>
+        <label>
+          <name>Almost All</name>
+          <membershipFunction>trapezoid(0.7, 0.8, 1, 2)</membershipFunction>
+        </label>
+      </quantifier>
+      <quantifier>
+        <name>Absolute</name>
+        <type>Absolute</type>
+        <discourse>
+          <min>0</min>
+          <max>96453</max>
+        </discourse>
+        <label>
+          <name>More than 10000</name>
+          <membershipFunction>classic(q, 10000)</membershipFunction>
+        </label>
+        <label>
+          <name>Less than 1000</name>
+          <membershipFunction>classic(l, 1000)</membershipFunction>
+        </label>
+      </quantifier>
+    </quantifiers>
+
+    <qualifiers>
+      <qualifier>
+        <name>temperature</name>
+        <discourse>
+          <min>0</min>
+          <max>1</max>
+        </discourse>
+        <label>
+          <name>very cold</name>
+          <membershipFunction>trapezoid(-22, -21, -10- 0)</membershipFunction>
+        </label>
+        <label>
+          <name>cold</name>
+          <membershipFunction>trapezoid(-5, 5, 7, 15)</membershipFunction>
+        </label>
+        <label>
+          <name>cold</name>
+          <membershipFunction>trapezoid(10, 14, 16, 20)</membershipFunction>
+        </label>
+        <label>
+          <name>cold</name>
+          <membershipFunction>trapezoid(18, 22, 26, 30)</membershipFunction>
+        </label>
+        <label>
+          <name>cold</name>
+          <membershipFunction>trapezoid(28, 30, 40, 41)</membershipFunction>
+        </label>
+      </qualifier>
+    </qualifiers>
+
+    <summarizers>
+      <summarizer>
+        <name>Apparent temperature</name>
+        <discourse>
+          <min>0</min>
+          <max>1</max>
+        </discourse>
+        <label>
+          <name>very cold</name>
+          <membershipFunction>trapezoid(-29, -28, -10- 0)</membershipFunction>
+        </label>
+        <label>
+          <name>cold</name>
+          <membershipFunction>trapezoid(-5, 5, 7, 15)</membershipFunction>
+        </label>
+        <label>
+          <name>cold</name>
+          <membershipFunction>trapezoid(10, 14, 16, 20)</membershipFunction>
+        </label>
+        <label>
+          <name>cold</name>
+          <membershipFunction>trapezoid(18, 22, 26, 30)</membershipFunction>
+        </label>
+        <label>
+          <name>cold</name>
+          <membershipFunction>trapezoid(28, 30, 40, 41)</membershipFunction>
+        </label>        
+      </summarizer>
+    </summarizers>
+
+    <connectors>
+      <connector>
+        <name>AND</name>
+      </connector>
+      <connector>
+        <name>OR</name>
+      </connector>
+    </connectors>
+
+    <modifiers>
+      <modifier>
+        <name>NOT</name>
+        <action>complement</action>
+      </modifier>
+      <modifier>
+        <name>Absolutely</name>
+        <action>4</action>
+      </modifier>
+    </modifiers>
+  </settings>
+</root>
