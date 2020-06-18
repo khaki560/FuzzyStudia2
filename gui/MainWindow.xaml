@@ -35,21 +35,20 @@
 				<DockPanel LastChildFill="True">
 					<Label Content="Summaries Number:" FontSize="15" DockPanel.Dock="Top" VerticalAlignment="Center"/>
 					<DockPanel LastChildFill="True" DockPanel.Dock="Bottom" >
-						<Button Name="BSummariesNumber" Content="Apply" DockPanel.Dock="Right" VerticalAlignment="Center"/>
+						<Button Name="BSummariesNumber" Content="Apply" DockPanel.Dock="Right" VerticalAlignment="Center" Click="BSummariesNumber_Click"/>
 						<TextBox Name="TBSummariesNumber" FontSize="15" DockPanel.Dock="Left" VerticalAlignment="Center" Text="1"/>
 					</DockPanel>
 				</DockPanel>
 				<DockPanel LastChildFill="True">
 					<Label Content="output file:" FontSize="15" DockPanel.Dock="Top" VerticalAlignment="Center"/>
 					<DockPanel LastChildFill="True" DockPanel.Dock="Bottom" >
-						<Button Name="BOutputPath" Content="Apply" DockPanel.Dock="Right" VerticalAlignment="Center"/>
 						<TextBox Name="TBOutputPath" FontSize="15" DockPanel.Dock="Left" VerticalAlignment="Center" Text="output.txt"/>
 					</DockPanel>
 				</DockPanel>
 				<DockPanel LastChildFill="True">
-					<Label Content="output file:" FontSize="15" DockPanel.Dock="Top" VerticalAlignment="Center"/>
+					<Label Content="settings file:" FontSize="15" DockPanel.Dock="Top" VerticalAlignment="Center"/>
 					<DockPanel LastChildFill="True" DockPanel.Dock="Bottom" >
-						<Button Name="BOSettingsPath" Content="Apply" DockPanel.Dock="Right" VerticalAlignment="Center"/>
+						<Button Name="BOSettingsPath" Content="Apply" DockPanel.Dock="Right" VerticalAlignment="Center" Click="BOSettingsPath_Click"/>
 						<TextBox Name="TBSettingsPath" FontSize="15" DockPanel.Dock="Left" VerticalAlignment="Center" Text="settings.xml"/>
 					</DockPanel>
 				</DockPanel>
@@ -138,12 +137,12 @@
 						<TextBox Name="TBT10" FontSize="15" DockPanel.Dock="Right" VerticalAlignment="Center" Text="1"/>
 					</DockPanel>
 				</Border>
-				<Border Grid.Row="11" BorderBrush="Black" BorderThickness="1">
+				<!--<Border Grid.Row="11" BorderBrush="Black" BorderThickness="1">
 					<DockPanel LastChildFill="True">
 						<Label Content="T11:" FontSize="15" DockPanel.Dock="Left" VerticalAlignment="Center"/>
 						<TextBox Name="TBT11" FontSize="15" DockPanel.Dock="Right" VerticalAlignment="Center" Text="1"/>
 					</DockPanel>
-				</Border>
+				</Border>-->
 				<Button Content="Start" Grid.Row="12" Click="Button_Click"/>
 				<Button Content="Exit" Grid.Row="13" Click="Button_Click_1"/>
 				

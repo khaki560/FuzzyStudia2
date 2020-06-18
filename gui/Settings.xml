@@ -1,132 +1,185 @@
 ﻿<?xml version='1.0' encoding='utf-8'?>
 <root>
   <settings>
-    <connectionString></connectionString>
-    <quantifiers>
-      <quantifier>
-        <name>Relative</name>
-        <type>Relative</type>
-        <discourse>
-          <min>0</min>
-          <max>1</max>
-        </discourse>
-        <label>
-          <name>Alomost None</name>
-          <membershipFunction>trapezoid(-1, 0, 0.1, 0.2)</membershipFunction>
-        </label>
-        <label>
-          <name>Some</name>
-          <membershipFunction>trapezoid(0.1, 0.2, 0.3, 0.4)</membershipFunction>
-        </label>
-        <label>
-          <name>about Half</name>
-          <membershipFunction>trapezoid(0.3, 0.4, 0.5, 0.6)</membershipFunction>
-        </label>
-        <label>
-          <name>Many</name>
-          <membershipFunction>trapezoid(0.5, 0.6, 0.7, 0.8)</membershipFunction>
-        </label>
-        <label>
-          <name>Almost All</name>
-          <membershipFunction>trapezoid(0.7, 0.8, 1, 2)</membershipFunction>
-        </label>
-      </quantifier>
-      <quantifier>
-        <name>Absolute</name>
-        <type>Absolute</type>
-        <discourse>
-          <min>0</min>
-          <max>96453</max>
-        </discourse>
-        <label>
-          <name>More than 10000</name>
-          <membershipFunction>classic(q, 10000)</membershipFunction>
-        </label>
-        <label>
-          <name>Less than 1000</name>
-          <membershipFunction>classic(l, 1000)</membershipFunction>
-        </label>
-      </quantifier>
-    </quantifiers>
+    <!-- Server=DESKTOP-2B7NGKL;Database=FuzzyDataSet;Integrated Security = SSPI;MultipleActiveResultSets=true -->
+    <server>DESKTOP-2B7NGKL</server>
+    <database>FuzzyDataSet</database>
+    <table>weather</table>
+    <security>SSPI</security>
+    <MultipleActiveResultSets>true</MultipleActiveResultSets>
+    <sort></sort>
 
-    <qualifiers>
-      <qualifier>
-        <name>temperature</name>
-        <discourse>
-          <min>0</min>
-          <max>1</max>
-        </discourse>
-        <label>
-          <name>very cold</name>
-          <membershipFunction>trapezoid(-22, -21, -10- 0)</membershipFunction>
-        </label>
-        <label>
-          <name>cold</name>
-          <membershipFunction>trapezoid(-5, 5, 7, 15)</membershipFunction>
-        </label>
-        <label>
-          <name>cold</name>
-          <membershipFunction>trapezoid(10, 14, 16, 20)</membershipFunction>
-        </label>
-        <label>
-          <name>cold</name>
-          <membershipFunction>trapezoid(18, 22, 26, 30)</membershipFunction>
-        </label>
-        <label>
-          <name>cold</name>
-          <membershipFunction>trapezoid(28, 30, 40, 41)</membershipFunction>
-        </label>
-      </qualifier>
-    </qualifiers>
 
-    <summarizers>
-      <summarizer>
-        <name>Apparent temperature</name>
-        <discourse>
-          <min>0</min>
-          <max>1</max>
-        </discourse>
-        <label>
-          <name>very cold</name>
-          <membershipFunction>trapezoid(-29, -28, -10- 0)</membershipFunction>
-        </label>
-        <label>
-          <name>cold</name>
-          <membershipFunction>trapezoid(-5, 5, 7, 15)</membershipFunction>
-        </label>
-        <label>
-          <name>cold</name>
-          <membershipFunction>trapezoid(10, 14, 16, 20)</membershipFunction>
-        </label>
-        <label>
-          <name>cold</name>
-          <membershipFunction>trapezoid(18, 22, 26, 30)</membershipFunction>
-        </label>
-        <label>
-          <name>cold</name>
-          <membershipFunction>trapezoid(28, 30, 40, 41)</membershipFunction>
-        </label>        
-      </summarizer>
-    </summarizers>
-
-    <connectors>
-      <connector>
-        <name>AND</name>
-      </connector>
-      <connector>
-        <name>OR</name>
-      </connector>
-    </connectors>
-
-    <modifiers>
-      <modifier>
-        <name>NOT</name>
-        <action>complement</action>
-      </modifier>
-      <modifier>
-        <name>Absolutely</name>
-        <action>4</action>
-      </modifier>
-    </modifiers>
+      
+    <attributes>
+      <temperature>3</temperature>
+      <apparent_temperature>4</apparent_temperature>
+      <humidity>5</humidity>
+      <wind_speed>6</wind_speed>
+      <wind_degree>7</wind_degree>
+      <visibility>8</visibility>
+      <pressure>10</pressure>
+    </attributes>
   </settings>
+  
+  <quantifiers>
+    <quantifier>
+      <name>Relative</name>
+      <type>Relative</type>
+      <discourse>
+        <min>0</min>
+        <max>1</max>
+      </discourse>
+      <label>
+        <name>Alomost None</name>
+        <membershipFunction>trapezoid(-1, 0, 0.1, 0.2)</membershipFunction>
+      </label>
+      <label>
+        <name>Some</name>
+        <membershipFunction>trapezoid(0.1, 0.2, 0.3, 0.4)</membershipFunction>
+      </label>
+      <label>
+        <name>about Half</name>
+        <membershipFunction>trapezoid(0.3, 0.4, 0.6, 0.7)</membershipFunction>
+      </label>
+      <label>
+        <name>Many</name>
+        <membershipFunction>trapezoid(0.6, 0.7, 0.8, 0.9)</membershipFunction>
+      </label>
+      <label>
+        <name>Almost All</name>
+        <membershipFunction>trapezoid(0.85, 0.9, 1, 2)</membershipFunction>
+      </label>
+    </quantifier>
+    <quantifier>
+      <name>Absolute</name>
+      <type>Absolute</type>
+      <discourse>
+        <min>0</min>
+        <max>96453</max>
+      </discourse>
+      <label>
+        <name>More than 10000</name>
+        <membershipFunction>classic(g, 10000)</membershipFunction>
+      </label>
+      <label>
+        <name>Less than 1000</name>
+        <membershipFunction>classic(l, 1000)</membershipFunction>
+      </label>
+    </quantifier>
+  </quantifiers>
+
+  <qualifiers>
+    <qualifier>
+      <name>temperature</name>
+      <attribute>temperature</attribute>
+      <discourse>
+        <min>-21</min>
+        <max>40</max>
+      </discourse>
+      <label>
+        <name>very cold</name>
+        <membershipFunction>trapezoid(-22, -21, -10, 0)</membershipFunction>
+      </label>
+      <label>
+        <name>cold</name>
+        <membershipFunction>trapezoid(-5, 5, 7, 15)</membershipFunction>
+      </label>
+      <label>
+        <name>warm</name>
+        <membershipFunction>trapezoid(10, 14, 16, 20)</membershipFunction>
+      </label>
+      <label>
+        <name>hot</name>
+        <membershipFunction>trapezoid(18, 22, 26, 30)</membershipFunction>
+      </label>
+      <label>
+        <name>very hot</name>
+        <membershipFunction>trapezoid(28, 30, 40, 41)</membershipFunction>
+      </label>
+    </qualifier>
+   <qualifier>
+      <name>wind speed</name>
+      <attribute>wind_speed</attribute>
+      <discourse>
+        <min>0</min>
+        <max>64</max>
+      </discourse>
+      <label>
+        <name>weak</name>
+        <membershipFunction>trapezoid(-1, 0, 18, 25)</membershipFunction>
+      </label>
+      <label>
+        <name>normal</name>
+        <membershipFunction>gauss(10, 2.5)</membershipFunction>
+      </label>
+      <label>
+        <name>strong</name>
+        <membershipFunction>trapezoid(35, 40, 64, 70)</membershipFunction>
+      </label>
+    </qualifier>  
+  </qualifiers>
+
+  <summarizers>
+    <summarizer>
+      <name>Apparent temperature</name>
+      <attribute>apparent_temperature</attribute>
+      <discourse>
+        <min>-27</min>
+        <max>40</max>
+      </discourse>
+      <label>
+        <name>very cold</name>
+        <membershipFunction>trapezoid(-29, -28, -10, 0)</membershipFunction>
+      </label>
+      <label>
+        <name>cold</name>
+        <membershipFunction>trapezoid(-5, 5, 7, 15)</membershipFunction>
+      </label>
+      <label>
+        <name>warm</name>
+        <membershipFunction>trapezoid(10, 14, 16, 20)</membershipFunction>
+      </label>
+      <label>
+        <name>hot</name>
+        <membershipFunction>trapezoid(18, 22, 26, 30)</membershipFunction>
+      </label>
+      <label>
+        <name>very hot</name>
+        <membershipFunction>trapezoid(28, 30, 40, 41)</membershipFunction>
+      </label>        
+    </summarizer>
+    <summarizer>
+      <name>humidity</name>
+      <attribute>humidity</attribute>
+      <discourse>
+        <min>0</min>
+        <max>1</max>
+      </discourse>
+      <label>
+        <name>very dry</name>
+        <membershipFunction>trapezoid(-1, 0.05, 0.15, 0.2)</membershipFunction>
+      </label>
+      <label>
+        <name>dry</name>
+        <membershipFunction>triangle(0.2, 0.3, 0.4)</membershipFunction>
+      </label>
+      <label>
+        <name>normal</name>
+        <membershipFunction>trapezoid(0.35, 0.45, 0.55, 0.6)</membershipFunction>
+      </label>
+      <label>
+        <name>steamy</name>
+        <membershipFunction>trapezoid(0.5, 0.55, 0.75, 0.8)</membershipFunction>
+      </label>
+      <label>
+        <name>very steamy</name>
+        <membershipFunction>trapezoid(0.75, 0.8, 1, 1.1)</membershipFunction>
+      </label>
+    </summarizer>
+  </summarizers>
+
+  <hedges>
+    <Absolutely>4</Absolutely>
+  </hedges>
 </root>

@@ -15,3 +15,6 @@ C:\00_studia\2sem\kadi\project\Fuzzy\gui\obj\Debug\gui.exe
 C:\00_studia\2sem\kadi\project\Fuzzy\gui\obj\Debug\gui.pdb
 C:\00_studia\2sem\kadi\project\Fuzzy\gui\obj\Debug\SummarizerControl.g.cs
 C:\00_studia\2sem\kadi\project\Fuzzy\gui\obj\Debug\SummarizerControl.baml
+C:\00_studia\2sem\kadi\project\Fuzzy\gui\bin\Debug\lib.dll
+C:\00_studia\2sem\kadi\project\Fuzzy\gui\bin\Debug\lib.pdb
+C:\00_studia\2sem\kadi\project\Fuzzy\gui\obj\Debug\gui.csproj.CopyComplete

@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
@@ -13,6 +14,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using lib;
 
 namespace gui
 {
@@ -21,48 +23,173 @@ namespace gui
     /// </summary>
     public partial class MainWindow : Window
     {
-        private List<SummarizerControl> summarizers = new List<SummarizerControl>();
-        private List<List<string>> ParseXml()
+        private List<string> connectors;
+        private List<string> modifiers;
+        private List<string> summarizers;
+        private List<string> quantifiers;
+        private List<string> qualifiers;
+
+        string[] qualityNames;
+
+        private List<SummarizerControl> summary = new List<SummarizerControl>();
+
+        public void init()
         {
-            var modifiers = new List<string>   {"", "NOT", "Absolutely" };
-            var quantifiers = new List<string> {"", "Over 100", "half" };
-            var qualifiers = new List<string>  {"", "salary over 1000", "small salary" };
-            var summarizers = new List<string> {"", "young", "old" };
-            var connectors = new List<string>  {"", "AND", "OR" };
-
-            return new List<List<string>> { modifiers, quantifiers, qualifiers, summarizers, connectors };
+            LinguisticManager.init(TBSettingsPath.Text);
+            connectors = LinguisticManager.GetConnectorsName();
+            connectors.Insert(0, "");
+            modifiers = LinguisticManager.GetModifiersName();
+            modifiers.Insert(0, "");
+            summarizers = LinguisticManager.GetSummarizersName();
+            summarizers.Insert(0, "");
+            quantifiers = LinguisticManager.GetQuantifiersName();
+            quantifiers.Insert(0, "");
+            qualifiers = LinguisticManager.GetQualifiersName();
+            qualifiers.Insert(0, "");
+            AddSummary(1);
         }
-
         public MainWindow()
         {
+            qualityNames = new string[10] { "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10"};
             InitializeComponent();
-            var a = ParseXml();
-
-            var s1 = new SummarizerControl(1, a[0], a[1], a[2], a[3], a[4]);
-            SPMain.Children.Add(s1);
-            var s2 = new SummarizerControl(2, a[0], a[1], a[2], a[3], a[4]);
-            SPMain.Children.Add(s2);
-
-            summarizers.Add(s1);
-            summarizers.Add(s2);
+            init();
         }
 
         private void Button_Click(object sender, RoutedEventArgs e)
         {
-            var a = summarizers[0].GetQuantifierParameters();
-            var b = summarizers[0].GetId();
-            var c = summarizers[0].GetQualifierParameters();
-            var d = summarizers[0].GetSummarizerParameters();
+            LinguisticSummary[] summaryArray = new LinguisticSummary[summary.Count];
+            string[] results = new string[summary.Count];
+            string outputFile = TBOutputPath.Text;
 
-            var z = summarizers[1].GetQuantifierParameters();
-            var f = summarizers[1].GetId();
-            var g = summarizers[1].GetQualifierParameters();
-            var h = summarizers[1].GetSummarizerParameters();
+            int i = 0;
+            foreach (var su in summary)
+            {
+                var q = su.GetQuantifierParameters();
+                var w = su.GetQualifierParameters();
+                var s = su.GetSummarizerParameters();
+
+                string qS = q.modifiers[0] + "," + q.modifiers[1] + "," + q.value;
+                var qList = new List<string>();
+                qList.Add(qS);
+
+                string wS1 = w[0].modifiers[0] + "," + w[0].modifiers[1] + "," + w[0].value + ',' + w[1].connector;
+                string wS2 = w[1].modifiers[0] + "," + w[1].modifiers[1] + "," + w[1].value;
+                var wList = new List<string>();
+                wList.Add(wS1);
+                if(!String.IsNullOrEmpty(w[1].connector))
+                {
+                    wList.Add(wS2);
+                }
+
+                string sS1 = s[0].modifiers[0] + "," + s[0].modifiers[1] + "," + s[0].value + ',' + s[1].connector;
+                string sS2 = s[1].modifiers[0] + "," + s[1].modifiers[1] + "," + s[1].value;
+
+                var sList = new List<string>();
+                sList.Add(sS1);
+                if (!String.IsNullOrEmpty(s[1].connector))
+                {
+                    sList.Add(sS2);
+                }
+
+                summaryArray[i] = LinguisticManager.CreateSummary(qList, wList, sList);
+                i++;
+            }
+
+            SaveToFile(summaryArray, outputFile);
+        }
+
+        private void SaveToFile(LinguisticSummary[] ob, string outFile)
+        {
+            if (File.Exists(outFile))
+            {
+                File.Delete(outFile);
+            }
+
+            using (StreamWriter outputFile = new StreamWriter(outFile))
+            {
+                var weights = GetQualityWeights();
+                for (int i = 0; i < ob.Length; i++)
+                {
+                    var summary = ob[i];
+                    var s = summary.MakeSummary(LinguisticManager.GetData());
+                    string qualityR = "Quality Result: ";
+                    string qualityW = "Quality Weights: ";
+                    for (int j = 0; j < weights.Length; j++ )
+                    {
+                        var q = summary.CreateQualityMeasure(j, LinguisticManager.GetData());
+                        qualityR += qualityNames[j] + ": " + q.ToString() + " ";
+                        qualityW += qualityNames[j] + ": " + weights[j].ToString() + " ";  
+                    }
+                    outputFile.WriteLine(s);
+                    outputFile.WriteLine(qualityR);
+                    outputFile.WriteLine(qualityW);
+                    int[] sequence = Enumerable.Range(1, weights.Length).ToArray();
+                    outputFile.WriteLine(summary.CreateFinalQualityMeasure(sequence, weights, LinguisticManager.GetData()));
+                }
+            }
+        }
+
+        private double[] GetQualityWeights()
+        {
+            var result = new double[10];
+            result[0] = double.Parse(TBT1.Text);
+            result[1] = double.Parse(TBT2.Text);
+            result[2] = double.Parse(TBT3.Text);
+            result[3] = double.Parse(TBT4.Text);
+            result[4] = double.Parse(TBT5.Text);
+            result[5] = double.Parse(TBT6.Text);
+            result[6] = double.Parse(TBT7.Text);
+            result[7] = double.Parse(TBT8.Text);
+            result[8] = double.Parse(TBT9.Text);
+            result[9] = double.Parse(TBT10.Text);
+
+
+            double sum = result.Sum();
+            for(int i = 0; i < result.Length; i++)
+            {
+                result[i] /= sum;
+            }
+
+            return result;
         }
 
         private void Button_Click_1(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void refresh()
+        {
+            foreach(var el in summary)
+            {
+                SPMain.Children.Remove(el);
+                SPMain.Children.Add(el);
+            }
+            
+        }
+
+        private void AddSummary(int number)
+        {
+            foreach (var el in summary)
+            {
+                SPMain.Children.Remove(el);
+            }
+            summary.Clear();
+            for (int i = 0; i < number; i++)
+            {
+                summary.Add(new SummarizerControl(i + 1, modifiers, quantifiers, qualifiers, summarizers, connectors));
+            }
+            refresh();
+        }
+        private void BSummariesNumber_Click(object sender, RoutedEventArgs e)
+        {
+            var number = int.Parse(TBSummariesNumber.Text);
+            AddSummary(number);
+        }
+
+        private void BOSettingsPath_Click(object sender, RoutedEventArgs e)
+        {
+            init();
         }
     }
 }
