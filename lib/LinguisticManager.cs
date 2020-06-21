@@ -40,7 +40,6 @@ namespace lib
             hedges = xmlReader.GetHedges();
             var linguisticParameters = xmlReader.GetLinguisticVariables();
             
-            //TODO: wywtorzyc summarizers, quantifiers, qualifiers;
             for(int i = 0; i < linguisticParameters.Count; i++)
             {
                 var type = linguisticParameters[i].type;

@@ -10,12 +10,11 @@
     <sort></sort>
 
 
-      
     <attributes>
       <temperature>3</temperature>
       <apparent_temperature>4</apparent_temperature>
       <humidity>5</humidity>
-      <wind_speed>6</wind_speed>
+      <wind_speed>6</wind_speed> 
       <wind_degree>7</wind_degree>
       <visibility>8</visibility>
       <pressure>10</pressure>
@@ -23,6 +22,34 @@
   </settings>
   
   <quantifiers>
+    <quantifier>
+      <name>test_1</name>
+      <type>Relative</type>
+      <discourse>
+        <min>0</min>
+        <max>1</max>
+      </discourse>
+      <label>
+        <name>test0</name>
+        <membershipFunction>trapezoid(-1, 0, 1, 2)</membershipFunction>
+      </label>
+      <label>
+        <name>test1</name>
+        <membershipFunction>triangle(0, 0.5, 1)</membershipFunction>
+      </label>
+      <label>
+        <name>test2</name>
+        <membershipFunction>triangle(0, 0.25, 0.5)</membershipFunction>
+      </label>
+      <label>
+        <name>test3</name>
+        <membershipFunction>triangle(0, 0.125, 0.25)</membershipFunction>
+      </label>
+      <label>
+        <name>test4</name>
+        <membershipFunction>trapezoid(0, 0.4, 0.6, 1)</membershipFunction>
+      </label>
+    </quantifier>
     <quantifier>
       <name>Relative</name>
       <type>Relative</type>
@@ -38,6 +65,10 @@
         <name>Some</name>
         <membershipFunction>trapezoid(0.1, 0.2, 0.3, 0.4)</membershipFunction>
       </label>
+      <label>
+        <name>about_1_4</name>
+        <membershipFunction>triangle(0.0, 0.25, 0.5)</membershipFunction>
+      </label>      
       <label>
         <name>about Half</name>
         <membershipFunction>trapezoid(0.3, 0.4, 0.6, 0.7)</membershipFunction>
@@ -117,7 +148,51 @@
         <name>strong</name>
         <membershipFunction>trapezoid(35, 40, 64, 70)</membershipFunction>
       </label>
-    </qualifier>  
+    </qualifier>
+    <qualifier>
+      <name>wind degree</name>
+      <attribute>wind_degree</attribute>
+      <discourse>
+        <min>0</min>
+        <max>360</max>
+      </discourse>
+      <label>
+        <name>N</name>
+        <membershipFunction>trapezoid(-1, 0, 90, 100)</membershipFunction>
+      </label>
+      <label>
+        <name>E</name>
+        <membershipFunction>trapezoid(80, 90, 180, 185)</membershipFunction>
+      </label>
+      <label>
+        <name>S</name>
+        <membershipFunction>trapezoid(175, 180, 270, 280)</membershipFunction>
+      </label>
+      <label>
+        <name>W</name>
+        <membershipFunction>trapezoid(265, 270, 360, 361)</membershipFunction>
+      </label>
+    </qualifier>
+    <qualifier>
+      <name>pressure</name>
+      <attribute>pressure</attribute>
+      <discourse>
+        <min>973</min>
+        <max>1046</max>
+      </discourse>
+      <label>
+        <name>low</name>
+        <membershipFunction>trapezoid(972, 973, 999, 1000)</membershipFunction>
+      </label>
+      <label>
+        <name>normal</name>
+        <membershipFunction>trapezoid(999, 1000, 1010, 1020)</membershipFunction>
+      </label>
+      <label>
+        <name>high</name>
+        <membershipFunction>trapezoid(1015, 1020, 1046, 1047)</membershipFunction>
+      </label>
+    </qualifier>
   </qualifiers>
 
   <summarizers>
@@ -147,7 +222,7 @@
       <label>
         <name>very hot</name>
         <membershipFunction>trapezoid(28, 30, 40, 41)</membershipFunction>
-      </label>        
+      </label>
     </summarizer>
     <summarizer>
       <name>humidity</name>
@@ -177,9 +252,36 @@
         <membershipFunction>trapezoid(0.75, 0.8, 1, 1.1)</membershipFunction>
       </label>
     </summarizer>
+    <summarizer>
+      <name>visibility</name>
+      <attribute>visibility</attribute>
+      <discourse>
+        <min>0</min>
+        <max>16</max>
+      </discourse>
+      <label>
+        <name>poor</name>
+        <membershipFunction>trapezoid(-1, 0.1, 1, 2)</membershipFunction>
+      </label>
+      <label>
+        <name>normal</name>
+        <membershipFunction>trapezoid(2, 4, 6, 8)</membershipFunction>
+      </label>
+      <label>
+        <name>good</name>
+        <membershipFunction>trapezoid(7, 8, 16, 17)</membershipFunction>
+      </label>
+    </summarizer>
   </summarizers>
 
   <hedges>
-    <Absolutely>4</Absolutely>
+    <absolutely>4</absolutely>
+    <very>2</very>
+    <much_more>1.75</much_more>
+    <more>1.5</more>
+    <plus>1.25</plus>
+    <minus>0.75</minus>
+    <more_or_less>0.5</more_or_less>
+    <slighty>0.25</slighty>
   </hedges>
 </root>

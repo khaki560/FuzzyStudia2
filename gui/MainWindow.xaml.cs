@@ -50,7 +50,7 @@ namespace gui
         }
         public MainWindow()
         {
-            qualityNames = new string[10] { "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10"};
+            qualityNames = new string[11] { "T1", "T2", "T3", "T4", "T5", "T6", "T7", "T8", "T9", "T10", "T11"};
             InitializeComponent();
             init();
         }
@@ -123,7 +123,7 @@ namespace gui
                     outputFile.WriteLine(s);
                     outputFile.WriteLine(qualityR);
                     outputFile.WriteLine(qualityW);
-                    int[] sequence = Enumerable.Range(1, weights.Length).ToArray();
+                    int[] sequence = Enumerable.Range(0, weights.Length).ToArray();
                     outputFile.WriteLine(summary.CreateFinalQualityMeasure(sequence, weights, LinguisticManager.GetData()));
                 }
             }
@@ -131,7 +131,7 @@ namespace gui
 
         private double[] GetQualityWeights()
         {
-            var result = new double[10];
+            var result = new double[11];
             result[0] = double.Parse(TBT1.Text);
             result[1] = double.Parse(TBT2.Text);
             result[2] = double.Parse(TBT3.Text);
@@ -142,6 +142,7 @@ namespace gui
             result[7] = double.Parse(TBT8.Text);
             result[8] = double.Parse(TBT9.Text);
             result[9] = double.Parse(TBT10.Text);
+            result[10] = double.Parse(TBT11.Text);
 
 
             double sum = result.Sum();

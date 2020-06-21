@@ -13,7 +13,16 @@ namespace lib.variable
 
         public override double Compute(string label, double value)
         {
-            throw new System.NotImplementedException();
+            int i = 0;
+            for (i = 0; i < H.Length; i++)
+            {
+                if (H[i] == label)
+                {
+                    break;
+                }
+            }
+
+            return G[i].Calc(value);
         }
 
         public override FuzzySet CreateSet(string label, FuzzyModel data)

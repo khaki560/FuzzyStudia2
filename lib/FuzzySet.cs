@@ -2,6 +2,7 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Linq.Expressions;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -10,7 +11,7 @@ namespace lib
     public class FuzzySet
     {
         private List<Tuple<Double, Double>> mSet = new List<Tuple<Double, Double>>();
-
+        private IMembershipFunction fun;
 
         private FuzzySet(List<Tuple<Double, Double>> set)
         {
@@ -19,6 +20,7 @@ namespace lib
             {
                 mSet.Add(new Tuple<double, double>(el.Item1, el.Item2));
             }
+            fun = null;
         }
 
         public FuzzySet(double[] input, double[] value, IMembershipFunction memberShipFunction)
@@ -28,6 +30,7 @@ namespace lib
             {
                 mSet.Add(new Tuple<double, double>(input[i], memberShipFunction.Calc(value[i])));
             }
+            fun = memberShipFunction;
         }
 
         public List<Tuple<Double, Double>> Get()
@@ -122,12 +125,41 @@ namespace lib
 
         public bool IsConcave()
         {
-            throw new NotImplementedException("No idea how");
+            return !IsConvex();
         }
 
         public bool IsConvex()
         {
-            throw new NotImplementedException("No idea how");
+            if(fun == null)
+            {
+                throw new Exception("incorect membership function");
+            }
+
+            System.Random random = new System.Random();
+            var alfa = new double[10];
+            for (int i = 0; i < 10; i++)
+            {
+                alfa[i] = random.NextDouble();
+            }
+
+            for(int i = 0; i < mSet.Count; i++)
+            {
+                for(int j = 0; j < mSet.Count; j++)
+                {
+                    foreach(var singleAlfa in alfa)
+                    {
+                        var a = mSet[i].Item1;
+                        var b = mSet[j].Item1;
+
+                        var c = singleAlfa * a + (1 - singleAlfa) * b;
+                        if (fun.Calc(c) < Math.Min(mSet[i].Item2, mSet[j].Item2))
+                        {
+                            return false;
+                        }
+                    }
+                }
+            }
+            return true;
         }
 
         public List<double> Supp()

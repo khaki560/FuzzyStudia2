@@ -266,12 +266,22 @@ namespace lib
 
         private double DegreeOfQuantifierImprecision(FuzzyModel data)
         {
-            return 0;
+            double value = quantifierParam.var.IntegrateSupp(quantifierParam.label);
+            if(!quantifierParam.var.IsRelative())
+            {
+                value /= data.Length();
+            }
+            return 1 - value;
         }
 
         private double DegreeOfQuantifierCardinality(FuzzyModel data)
         {
-            return 0;
+            double value = quantifierParam.var.Integrate(quantifierParam.label);
+            if (!quantifierParam.var.IsRelative())
+            {
+                value /= data.Length();
+            }
+            return 1 - value;
         }
 
         private double DegreeOfSummarizerCardinality(FuzzyModel data)
@@ -322,6 +332,16 @@ namespace lib
             }
         }
 
+        private double LengthOfQualifier(FuzzyModel data)
+        {
+            if (qualifierNumber > 0)
+            {
+                return 2 * Math.Pow(0.5, qualifierSet.Length);
+            }
+            return 0;
+            
+        }
+
         public double CreateQualityMeasure(int number, FuzzyModel data)
         {
             double result = -1;
@@ -357,6 +377,10 @@ namespace lib
                 case 9:
                     result = DegreeOfQualifierCardinality(data);
                     break;
+                case 10:
+                    result = LengthOfQualifier(data);
+                    break;
+
             }
             return Math.Round(result, 2);
         }

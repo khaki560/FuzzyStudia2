@@ -137,12 +137,12 @@
 						<TextBox Name="TBT10" FontSize="15" DockPanel.Dock="Right" VerticalAlignment="Center" Text="1"/>
 					</DockPanel>
 				</Border>
-				<!--<Border Grid.Row="11" BorderBrush="Black" BorderThickness="1">
+				<Border Grid.Row="11" BorderBrush="Black" BorderThickness="1">
 					<DockPanel LastChildFill="True">
 						<Label Content="T11:" FontSize="15" DockPanel.Dock="Left" VerticalAlignment="Center"/>
 						<TextBox Name="TBT11" FontSize="15" DockPanel.Dock="Right" VerticalAlignment="Center" Text="1"/>
 					</DockPanel>
-				</Border>-->
+				</Border>
 				<Button Content="Start" Grid.Row="12" Click="Button_Click"/>
 				<Button Content="Exit" Grid.Row="13" Click="Button_Click_1"/>
 				

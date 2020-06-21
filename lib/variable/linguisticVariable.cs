@@ -102,5 +102,16 @@ namespace lib.variable
             }
             return null;
         }
+
+
+        public virtual double Integrate(string label)
+        {
+            throw new Exception("Incorect class");
+        }
+
+        public virtual double IntegrateSupp(string label)
+        {
+            throw new Exception("Incorect class");
+        }
     }
 }
